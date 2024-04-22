@@ -1,4 +1,5 @@
 import numpy as np
+from copy import deepcopy
 
 
 class Position:
@@ -12,7 +13,13 @@ class Position:
     def __add__(self, o):
         self.x += o.x
         self.y += o.y
-        return self
+        return 
+    
+    def __str__(self) -> str:
+        return f"{self.x}:{self.y}"
+    
+    def to_tuple(self) -> tuple:
+        return (self.x, self.y)
 
 class Agent:
 
@@ -31,6 +38,9 @@ class Agent:
     
     def collision(self, agent) -> bool:
         return (self.position + self.dp).distance(agent.position) < self.rayon
+
+    def __str__(self) -> str:
+        return f"{self.id},{self.position},{self.speed},{self.rayon}"
 
 
 class Model:
@@ -89,5 +99,11 @@ class Model:
             del to_move[agent.id]
 
 
-
-
+class Step:
+    def __init__(self, id:int, agents:list[Agent]):
+        self.id = id
+        self.agents = agents
+    
+    def __str__(self) -> str:
+        l = list(map(str,self.agents))
+        return f"{self.id};{';'.join(l)}"
