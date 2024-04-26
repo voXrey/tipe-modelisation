@@ -39,6 +39,12 @@ class Agent:
     def collision(self, agent) -> bool:
         return (self.position + self.dp).distance(agent.position) < self.rayon
 
+    def count_collisions(self, agents:list) -> int:
+        i = 0
+        for agent in agents:
+            if self.collision(agent): i+=1
+        return i
+
     def __str__(self) -> str:
         return f"{self.id},{self.position},{self.speed},{self.rayon}"
 
@@ -97,6 +103,7 @@ class Model:
 
             moved[agent.id] = agent
             del to_move[agent.id]
+
 
 
 class Step:
