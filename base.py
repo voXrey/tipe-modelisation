@@ -38,8 +38,6 @@ class Action:
         self.x_intensity = x_intensity
         self.y_intensity = y_intensity
 
-
-
 class Entity:
     def __init__(self, position:Position, radius:float=0, speed:float=0) -> None:
         self.position = position
